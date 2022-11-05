@@ -1,30 +1,25 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import beakerImg from '../../beaker.png'
 
-export default function BeakerParts() {
-    const chemicalSubstances = {
-        name: "HCl",
-        molecular: 36,
-    };
+interface chemicalSubstanceProps {
+    name: string
+    molecular: number
+    isSelected: () => void
+}
 
-    const [beakerContent, setBeakerContent] = useState({
-        name : "a",
-        molecular: 0,
-    })
 
-    const getBeakerContents = () => {
-        setBeakerContent({ ...beakerContent, name: chemicalSubstances.name, molecular: chemicalSubstances.molecular});
-    };
-
+const BeakerParts: React.FC<chemicalSubstanceProps> = (props) => {
     return (
         <>
-            <button onClick={getBeakerContents}>
+            <button onClick={props.isSelected}>
                 <img src={beakerImg}></img>
             </button>
             <ul>
-                <li>物質: {beakerContent.name}</li>
-                <li>分子量: {beakerContent.molecular}</li>
+                <li>物質: {props.name}</li>
+                <li>分子量: {props.molecular}</li>
             </ul>
-        </>
-    );
+        </> 
+    )
 }
+
+export default BeakerParts;
